@@ -1,10 +1,10 @@
-# LexiSync
+# DictSage
 
 A modern, intuitive dictionary web application that helps users quickly find word definitions, examples, and related terms with a clean, ad-free interface.
 
-## 📚 About LexiSync
+## 📚 About DictSage
 
-LexiSync provides instant access to word definitions while offering personalized features like favorites and search history. Built with React and SUPABase, it combines powerful functionality with a seamless user experience.
+DictSage provides instant access to word definitions while offering personalized features like favorites and search history. Built with React and SUPABase, it combines powerful functionality with a seamless user experience.
 
 ### Key Features
 
@@ -50,8 +50,8 @@ LexiSync provides instant access to word definitions while offering personalized
 
 1. Clone the repository
    ```
-   git clone https://github.com/yourusername/lexisync.git
-   cd lexisync
+   git clone https://github.com/yourusername/dictsage.git
+   cd dictsage
    ```
 
 2. Install dependencies
@@ -76,7 +76,7 @@ LexiSync provides instant access to word definitions while offering personalized
 ## 📊 Project Structure
 
 ```
-lexisync/
+dictsage/
 ├── public/
 ├── src/
 │   ├── components/
