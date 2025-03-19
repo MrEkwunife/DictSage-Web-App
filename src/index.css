@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: inconsolata;
+  font-style: italic;
+  src: url("/src/assets/fonts/inconsolata/static/Inconsolata-Regular.ttf");
+}
+
+@font-face {
+  font-family: inter;
+  src: url("/src/assets/fonts/inter/static/Inter-Regular.ttf");
+}
+
+@font-face {
+  font-family: lora;
+  src: url("/src/assets/fonts/lora/Lora-VariableFont_wght.ttf");
+}
+
+@theme {
+  --font-inconsolata: "inconsolata";
+  --font-inter: "inter";
+  --font-lora: "lora";
+}
