@@ -2,7 +2,7 @@ import { useState } from "react";
 import PlayIcon from "../../assets/images/icon-play.svg";
 
 const MainHeader = ({ word, phonetics }) => {
-  const [audio] = useState(phonetics?.find((p) => p.audio)?.audio || "");
+  const audio = phonetics?.find((p) => p.audio)?.audio || "";
 
   const playAudio = () => {
     if (audio) {
