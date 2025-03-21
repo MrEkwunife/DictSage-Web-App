@@ -32,7 +32,7 @@ export default function Nav({ setSelectedFont }) {
     <>
       {modal && <Modal modal={modal} setModal={setModal} logout={Logout} />}
       <nav className="flex justify-between items-center gap-2 w-full">
-        <div className="flex items-center justify-center gap-1 sm:gap-4">
+        <div className="flex flex-1 items-center justify-center gap-1 sm:gap-4">
           <span className="flex-1">
             <img src={logo} alt="logo" className="w-full" />
           </span>
