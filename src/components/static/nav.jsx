@@ -38,7 +38,7 @@ export default function Nav({ setSelectedFont }) {
           </span>
           <span>Hello {username}!</span>
         </div>
-        <div className="flex items-center gap-10 sm:gap-4">
+        <div className="flex items-center gap-4 sm:gap-4">
           <div className="flex items-center gap-2.5 sm:gap-4">
             <SelectFont setSelectedFont={setSelectedFont} />
           </div>
