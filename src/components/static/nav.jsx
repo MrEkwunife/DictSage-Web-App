@@ -31,17 +31,16 @@ export default function Nav({ setSelectedFont }) {
   return (
     <>
       {modal && <Modal modal={modal} setModal={setModal} logout={Logout} />}
-      <nav className="flex justify-between items-center w-full">
-        <div className="flex items-center gap-2.5 sm:gap-4">
-          <span>
-            <img src={logo} alt="logo" />
+      <nav className="flex justify-between items-center gap-2 w-full">
+        <div className="flex items-center justify-center gap-1 sm:gap-4">
+          <span className="flex-1">
+            <img src={logo} alt="logo" className="w-full" />
           </span>
           <span>Hello {username}!</span>
         </div>
         <div className="flex items-center gap-10 sm:gap-4">
           <div className="flex items-center gap-2.5 sm:gap-4">
             <SelectFont setSelectedFont={setSelectedFont} />
-            <ToggleButton />
           </div>
           <button
             className="flex items-center gap-2.5 sm:gap-4 bg-red-500 py-1.5 px-2 text-white rounded-lg cursor-pointer"
