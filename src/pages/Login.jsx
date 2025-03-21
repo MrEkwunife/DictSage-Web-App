@@ -67,7 +67,7 @@ const Login = () => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="fuckersFuck@gmail.com"
+            placeholder="example@gmail.com"
             className="px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
             required
           />
