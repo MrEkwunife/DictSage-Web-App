@@ -1,34 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import logo from "../assets/images/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { toast, Toaster } from "sonner";
 
 const Signup = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const [display_name, setDisplay_name] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSignUp = async () => {
-    console.log("loading...");
-    setFormData({
-      email: email,
-      password: password,
-    });
-
     console.log("loading2...");
 
     const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
+      email: formData.email,
+      password: formData.password,
       options: {
         data: {
           display_name: display_name,
@@ -36,17 +33,18 @@ const Signup = () => {
       },
     });
     if (error) {
-      console.log(error);
-    } else if (data.user.identities.length === 0) {
-      console.log("User already exists");
-    } else {
-      toast.success("User success");
-      console.log(data);
+      toast.error(error.message);
+    }
+    if (data) {
+      toast.success("Sign up successful");
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
     }
   };
   return (
     <div className="min-h-screen flex flex-col gap-8 items-center justify-center">
-      <Toaster />
+      <Toaster position="top-left" richColors />
       <div className="flex flex-col gap-4 justify-center items-center">
         <img src={logo} alt="log" />
         <h1 className="text-3xl text-purple-400">Sign Up</h1>
@@ -54,7 +52,7 @@ const Signup = () => {
 
       <form
         className="max-w-lg mx-auto flex flex-col gap-3 p-4 border rounded-lg shadow-md text-sm sm:text-xl"
-        onClick={(e) => {
+        onSubmit={(e) => {
           e.preventDefault();
           handleSignUp();
         }}
@@ -79,11 +77,8 @@ const Signup = () => {
           <input
             type="email"
             name="email"
-            value={email}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setEmail(e.target.value);
-            }}
+            value={formData.email}
+            onChange={handleInputChange}
             placeholder="johnDoe@gmail.com"
             className="px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
             required
@@ -95,10 +90,8 @@ const Signup = () => {
           <input
             type="password"
             name="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            value={formData.password}
+            onChange={handleInputChange}
             className="px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
             required
           />
@@ -113,7 +106,7 @@ const Signup = () => {
       </form>
       <p className="text-lg">
         Already have account?{" "}
-        <Link to={"/login"} className="text-purple-600 hover:underline">
+        <Link to="/login" className="text-purple-600 hover:underline">
           Login
         </Link>
       </p>

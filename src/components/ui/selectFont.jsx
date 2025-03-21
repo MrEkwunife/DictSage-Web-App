@@ -19,7 +19,7 @@ const SelectFont = ({ setSelectedFont }) => {
   };
 
   return (
-    <select onChange={handleChange} className="sm:text-xl">
+    <select onChange={handleChange} className="sm:text-xl text-base">
       <option value="mono">Mono</option>
       <option value="sans-serif">Sans Serif</option>
       <option value="serif">Serif</option>

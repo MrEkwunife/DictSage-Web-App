@@ -1,41 +1,53 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import logo from "../assets/images/logo.svg";
 import { supabase } from "../lib/supabase";
 import { toast, Toaster } from "sonner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: email,
-    password: password,
+    email: "",
+    password: "",
   });
 
   const login = async () => {
-    setFormData({
-      email: email,
-      password: password,
-    });
-
     console.log(formData);
     const { data, error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
-      options: {
-        emailRedirectTo: "/",
-      },
     });
-    if (error) {
+    try {
+      if (error) {
+        toast.error(error.message);
+      }
+      if (data) {
+        toast.success("Login Successful");
+        setTimeout(() => {
+          navigate("/home");
+        }, 3000);
+        setFormData({
+          email: "",
+          password: "",
+        });
+      }
+    } catch (error) {
       toast.error(error);
     }
+  };
 
-    console.log(data);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
     <div className="min-h-screen gap-8 flex flex-col items-center justify-center">
-      <Toaster />
+      <Toaster position="top-right" richColors />
       <div className="flex flex-col gap-4 justify-center items-center">
         <img src={logo} alt="log" />
         <h1 className="text-3xl text-purple-400">Login</h1>
@@ -53,10 +65,8 @@ const Login = () => {
           <input
             type="email"
             name="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            value={formData.email}
+            onChange={handleInputChange}
             placeholder="fuckersFuck@gmail.com"
             className="px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
             required
@@ -68,10 +78,8 @@ const Login = () => {
           <input
             type="password"
             name="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            value={formData.password}
+            onChange={handleInputChange}
             className="px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
             required
           />
